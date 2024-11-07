@@ -1,0 +1,35 @@
+.not-toggled {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%; /* Use percentage for a perfect circle */
+  right: 10px;
+  top: 30px;
+  position: fixed; /* Ensure it's positioned properly */
+  transition: all 0.3s ease; /* Smooth transition */
+}
+
+.toggled {
+  top: 30px;
+  position: fixed; /* Ensure it's positioned properly */
+  transition: all 0.3s ease; /* Smooth transition */
+}
+
+.not-toggled > ul {
+  display: none; /* Initially hide the menu */
+}
+
+.not-toggled.active > ul {
+  display: flex; /* Use flex or block to show the menu */
+  flex-direction: column; /* Align items vertically */
+  position: absolute; /* Position relative to the parent */
+  top: 600px; /* Adjust as needed */
+  left: 0; /* Align to the left */
+  background-color: red; /* Background color for visibility */
+  width: 100%; /* Full width */
+  padding: 10px; /* Some padding */
+}
+
+.not-toggled.active {
+  height: 200px; /* Adjust height when active */
+  width: 200px; /* Adjust width when active */
+}

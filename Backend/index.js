@@ -39,6 +39,9 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"], // Ensure "Authorization" is listed
   })
 );
+app.get("/health", (req, res) => {
+  res.status(200).send("Healthy");
+});
 
 app.use("/auth", authRoutes);
 app.use("/api/users", userRoutes);
@@ -49,8 +52,9 @@ app.use("/api/services", serviceRoutes);
 app.use("/api/styles", stylesRoutes);
 app.use("/api/categories", categoriesRoutes);
 app.use("/api/availabilities", availabilitiesRoutes);
-app.listen(8000, () => {
-  console.log("Server running on port 8000");
+const PORT = process.env.PORT || 8000; // Use PORT from the environment variable or fallback to 8000 for local development
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
 
 module.exports = app;

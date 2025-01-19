@@ -35,7 +35,9 @@ function LandingPage() {
   useEffect(() => {
     const fetchStyles = async () => {
       try {
-        const response = await fetch("http://localhost:8000/api/styles/get");
+        const response = await fetch(
+          "https://madonna-backend.onrender.com/api/styles/get"
+        );
         const data = await response.json();
         if (response.ok) {
           setStyles(data);
@@ -68,7 +70,7 @@ function LandingPage() {
     const fetchCategories = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8000/api/categories/get"
+          "https://madonna-backend.onrender.com/api/categories/get"
         );
         if (!response.ok) {
           throw new Error("Failed to fetch categories");

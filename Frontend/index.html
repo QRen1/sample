@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Default Favicon -->
+    <link
+      id="dynamic-favicon"
+      rel="icon"
+      href="/image1.jpg"
+      type="image/jpeg"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Madonna || Aesthetics</title>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        fetch("http://localhost:8000/api/styles/get") // Replace with your API endpoint
+          .then((response) => response.json())
+          .then((data) => {
+            const formData = data[0]; // Assuming the first item has the header image URL
+            const favicon = document.getElementById("dynamic-favicon");
+
+            // If the API returns a valid URL, update the favicon
+            if (favicon && formData.headerImage?.url) {
+              console.log("Updating favicon to:", formData.headerImage.url); // Log URL for debugging
+              favicon.href = formData.headerImage.url; // Update favicon with the dynamic URL
+            }
+          })
+          .catch((error) => console.error("Error fetching data:", error));
+      });
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

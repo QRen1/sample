@@ -1,0 +1,142 @@
+/* General Styles */
+.drop-file-input {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  height: 200px;
+  border: 5px dashed;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity 0.3s ease, border-color 0.3s ease;
+}
+
+.drop-file-input:hover,
+.drop-file-input.dragover {
+  opacity: 0.8;
+  border-color: #005bb5;
+}
+
+.drop-file-input input {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.drop-file-input__label {
+  text-align: center;
+  color: #333;
+  font-weight: 600;
+  padding: 10px;
+}
+
+.drop-file-input__label img {
+  width: 80px;
+  margin-bottom: 12px;
+}
+
+/* Preview Styles */
+.drop-file-preview {
+  margin-top: 30px;
+  font-family: "Arial", sans-serif;
+}
+
+.drop-file-preview__title {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.drop-file-preview__item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f7f7f7;
+  padding: 12px 18px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.drop-file-preview__item:hover {
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px);
+}
+
+.drop-file-preview__item img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  margin-right: 15px;
+  border-radius: 8px;
+}
+
+.drop-file-preview__item__info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.drop-file-preview__item__info p {
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.drop-file-preview__item__del {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  background-color: #ff4d4d;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  opacity: 0;
+}
+
+.drop-file-preview__item:hover .drop-file-preview__item__del {
+  opacity: 1;
+}
+
+.drop-file-preview__item__del:hover {
+  background-color: #e60000;
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+  .drop-file-input {
+    width: 100%;
+    height: 150px;
+  }
+
+  .drop-file-preview__item {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .drop-file-preview__item__info {
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .drop-file-preview__item__del {
+    top: 10px;
+    right: 10px;
+  }
+}

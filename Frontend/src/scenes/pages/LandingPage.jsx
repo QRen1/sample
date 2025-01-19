@@ -169,7 +169,7 @@ function LandingPage() {
       transition: { type: "tween", duration: 1.2 },
     },
   };
-
+  const instagram = formData.instagram;
   return (
     <div className="h-full w-full overflow-x-hidden">
       <div className="mt-[60px] block h-[600px] w-full fifth:hidden">
@@ -412,7 +412,7 @@ function LandingPage() {
         </section>
         <div className="relative transform translate-y-[56px]">
           <div
-            className={` ${formData.instagram}`}
+            className="elfsight-app-b471bb66-0317-4003-8b23-720f3d57f982"
             data-elfsight-app-lazy
           ></div>
         </div>

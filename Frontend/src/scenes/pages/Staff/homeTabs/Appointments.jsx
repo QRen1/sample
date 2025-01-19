@@ -16,7 +16,7 @@ function Appointments() {
       try {
         const userToken = localStorage.getItem("accessToken");
         const response = await axios.get(
-          "http://localhost:8000/api/appointments/get",
+          "https://madonna-backend.onrender.com/api/appointments/get",
           {
             headers: { Authorization: `Bearer ${userToken}` },
           }
@@ -39,7 +39,7 @@ function Appointments() {
   const handleDelete = async (appointmentId) => {
     try {
       const response = await axios.delete(
-        `http://localhost:8000/api/appointments/${appointmentId}`
+        `https://madonna-backend.onrender.com/api/appointments/${appointmentId}`
       );
       if (response.status === 200) {
         // Filter out the deleted appointment from the state
@@ -64,7 +64,7 @@ function Appointments() {
 
     try {
       const response = await axios.put(
-        `http://localhost:8000/api/appointments/${appointmentId}`,
+        `https://madonna-backend.onrender.com/api/appointments/${appointmentId}`,
         { appointment: newStatus },
         { headers: { "Content-Type": "application/json" } }
       );

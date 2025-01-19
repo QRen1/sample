@@ -30,7 +30,7 @@ const Sidebar = () => {
     const fetchProfile = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8000/api/staff/profile",
+          "https://madonna-backend.onrender.com/api/staff/profile",
           {
             headers: {
               Authorization: `Bearer ${token}`,

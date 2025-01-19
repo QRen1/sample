@@ -20,7 +20,7 @@ const CategoryUpload = () => {
     const fetchCategories = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8000/api/categories/get"
+          "https://madonna-backend.onrender.com/api/categories/get"
         );
         if (!response.ok) {
           throw new Error("Failed to fetch categories");
@@ -83,7 +83,7 @@ const CategoryUpload = () => {
           const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
           // Send form data to the server
           const response = await fetch(
-            "http://localhost:8000/api/categories/create",
+            "https://madonna-backend.onrender.com/api/categories/create",
             {
               method: "POST",
               headers: {
@@ -116,7 +116,9 @@ const CategoryUpload = () => {
 
           // Refresh categories after successful upload
           const fetchCategories = async () => {
-            const res = await fetch("http://localhost:8000/api/categories");
+            const res = await fetch(
+              "https://madonna-backend.onrender.com/api/categories"
+            );
             const data = await res.json();
             setCategories(data);
           };
@@ -140,7 +142,7 @@ const CategoryUpload = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:8000/api/categories/delete/${categoryId}`,
+        `https://madonna-backend.onrender.com/api/categories/delete/${categoryId}`,
         {
           method: "DELETE",
         }

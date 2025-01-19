@@ -27,7 +27,7 @@ function Register() {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/staff/register",
+        "https://madonna-backend.onrender.com/api/staff/register",
         {
           fullName,
           email,

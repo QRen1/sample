@@ -65,7 +65,7 @@ const ServicesUpload = () => {
         // Submit to backend
         try {
           const response = await fetch(
-            "http://localhost:8000/api/services/create",
+            "https://madonna-backend.onrender.com/api/services/create",
             {
               method: "POST",
               headers: {
@@ -104,7 +104,7 @@ const ServicesUpload = () => {
   const fetchServices = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8000/api/services/getService"
+        "https://madonna-backend.onrender.com/api/services/getService"
       );
       if (!response.ok) {
         throw new Error("Failed to fetch services");
@@ -118,9 +118,12 @@ const ServicesUpload = () => {
   };
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`http://localhost:8000/api/services/${id}`, {
-        method: "DELETE",
-      });
+      const response = await fetch(
+        `https://madonna-backend.onrender.com/api/services/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
 
       if (response.ok) {
         toast.success("Service deleted successfully!");

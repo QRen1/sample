@@ -32,7 +32,7 @@ function AboutPage() {
   const loadAvailability = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8000/api/availabilities/availability/get"
+        "https://madonna-backend.onrender.com/api/availabilities/availability/get"
       );
       const data = response.data;
       if (data?.availability) {
@@ -70,7 +70,9 @@ function AboutPage() {
   useEffect(() => {
     const fetchStyles = async () => {
       try {
-        const response = await fetch("http://localhost:8000/api/styles/get");
+        const response = await fetch(
+          "https://madonna-backend.onrender.com/api/styles/get"
+        );
         const data = await response.json();
         if (response.ok) {
           setStyles(data);
@@ -103,7 +105,7 @@ function AboutPage() {
     const fetchCategories = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8000/api/categories/get"
+          "https://madonna-backend.onrender.com/api/categories/get"
         );
         const data = await response.json();
         if (response.ok) {

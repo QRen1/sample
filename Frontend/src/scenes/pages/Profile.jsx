@@ -21,7 +21,7 @@ function Profile({ setIsLoggedIn }) {
 
     // Fetch the profile first
     axios
-      .get("http://localhost:8000/api/users/profile", {
+      .get("https://madonna-backend.onrender.com/api/users/profile", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -30,7 +30,7 @@ function Profile({ setIsLoggedIn }) {
 
           // Fetch the user's appointments based on the userId
           return axios.get(
-            `http://localhost:8000/api/appointments/get/${response.data.userId}`,
+            `https://madonna-backend.onrender.com/api/appointments/get/${response.data.userId}`,
             {
               headers: { Authorization: `Bearer ${token}` },
             }
@@ -73,9 +73,12 @@ function Profile({ setIsLoggedIn }) {
 
     // Make a DELETE request to remove the appointment
     axios
-      .delete(`http://localhost:8000/api/appointments/${appointmentId}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .delete(
+        `https://madonna-backend.onrender.com/api/appointments/${appointmentId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then((response) => {
         // On success, remove the cancelled appointment from the state
         setAppointments(

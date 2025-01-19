@@ -28,7 +28,7 @@ const Appointment = ({ selectedItem, setOpenOuterDialog }) => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            "http://localhost:8000/api/appointments/get",
+            "https://madonna-backend.onrender.com/api/appointments/get",
             {
               headers: { Authorization: `Bearer ${userToken}` },
             }
@@ -63,7 +63,7 @@ const Appointment = ({ selectedItem, setOpenOuterDialog }) => {
   const loadUserProfile = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8000/api/users/profile",
+        "https://madonna-backend.onrender.com/api/users/profile",
         {
           headers: { Authorization: `Bearer ${userToken}` },
         }
@@ -86,7 +86,7 @@ const Appointment = ({ selectedItem, setOpenOuterDialog }) => {
     if (userToken) {
       try {
         const response = await axios.get(
-          "http://localhost:8000/api/appointments/get",
+          "https://madonna-backend.onrender.com/api/appointments/get",
           {
             headers: { Authorization: `Bearer ${userToken}` },
           }
@@ -113,7 +113,7 @@ const Appointment = ({ selectedItem, setOpenOuterDialog }) => {
   const loadAvailability = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8000/api/availabilities/availability/get"
+        "https://madonna-backend.onrender.com/api/availabilities/availability/get"
       );
       const { weeklyAvailability } = response.data?.availability || {};
       if (weeklyAvailability) {
@@ -214,7 +214,7 @@ const Appointment = ({ selectedItem, setOpenOuterDialog }) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/appointments/post",
+        "https://madonna-backend.onrender.com/api/appointments/post",
         appointmentData,
         { headers: { Authorization: `Bearer ${userToken}` } }
       );

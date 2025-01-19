@@ -28,7 +28,9 @@ const StyleUpload = () => {
   useEffect(() => {
     const fetchStyles = async () => {
       try {
-        const response = await fetch("http://localhost:8000/api/styles/get");
+        const response = await fetch(
+          "https://madonna-backend.onrender.com/api/styles/get"
+        );
         const data = await response.json();
         if (response.ok) {
           setStyles(data);
@@ -140,13 +142,16 @@ const StyleUpload = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:8000/api/styles/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(styleDetails),
-      });
+      const response = await fetch(
+        "https://madonna-backend.onrender.com/api/styles/create",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(styleDetails),
+        }
+      );
 
       if (response.ok) {
         toast.success("Style uploaded successfully!");
@@ -207,7 +212,7 @@ const StyleUpload = () => {
     try {
       const styleId = styles[0]._id;
       const response = await fetch(
-        `http://localhost:8000/api/styles/update/${styleId}`,
+        `https://madonna-backend.onrender.com/api/styles/update/${styleId}`,
         {
           method: "PUT",
           headers: {

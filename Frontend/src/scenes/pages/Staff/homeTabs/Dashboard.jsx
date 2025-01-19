@@ -169,7 +169,7 @@ function Dashboard() {
     const fetchServices = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8000/api/services/getService"
+          "https://madonna-backend.onrender.com/api/services/getService"
         );
         if (!response.ok) {
           throw new Error("Failed to fetch services");
@@ -190,7 +190,7 @@ function Dashboard() {
       try {
         const userToken = localStorage.getItem("AdminToken");
         const response = await axios.get(
-          "http://localhost:8000/api/appointments/get",
+          "https://madonna-backend.onrender.com/api/appointments/get",
           {
             headers: { Authorization: `Bearer ${userToken}` },
           }

@@ -24,7 +24,7 @@ function ServicesPage({ isLoggedIn }) {
     const fetchServices = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8000/api/services/getService"
+          "https://madonna-backend.onrender.com/api/services/getService"
         );
         if (!response.ok) {
           throw new Error("Failed to fetch services");

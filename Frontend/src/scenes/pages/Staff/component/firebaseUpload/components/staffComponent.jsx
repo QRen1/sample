@@ -18,7 +18,7 @@ function StaffProfileComponent() {
     const fetchProfile = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8000/api/staff/profile",
+          "https://madonna-backend.onrender.com/api/staff/profile",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -41,11 +41,14 @@ function StaffProfileComponent() {
     // Fetch all staff data
     const fetchAllStaff = async () => {
       try {
-        const response = await fetch("http://localhost:8000/api/staff/staff", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await fetch(
+          "https://madonna-backend.onrender.com/api/staff/staff",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         if (!response.ok) {
           throw new Error("Failed to fetch staff");
@@ -91,7 +94,7 @@ function StaffProfileComponent() {
     // Now update the new staff member's status to admin
     try {
       const response = await fetch(
-        `http://localhost:8000/api/staff/staff/${id}`,
+        `https://madonna-backend.onrender.com/api/staff/staff/${id}`,
         {
           method: "PUT",
           headers: {
@@ -160,7 +163,7 @@ function StaffProfileComponent() {
 
     try {
       const response = await fetch(
-        `http://localhost:8000/api/staff/staff/${id}`,
+        `https://madonna-backend.onrender.com/api/staff/staff/${id}`,
         {
           method: "DELETE",
           headers: {

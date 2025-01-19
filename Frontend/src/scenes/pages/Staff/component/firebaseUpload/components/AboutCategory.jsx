@@ -27,7 +27,7 @@ const AvailabilityForm = () => {
   const loadAvailability = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8000/api/availabilities/availability/get"
+        "https://madonna-backend.onrender.com/api/availabilities/availability/get"
       );
       const data = response.data;
       if (data?.availability) {
@@ -156,7 +156,7 @@ const AvailabilityForm = () => {
     };
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/availabilities/availability",
+        "https://madonna-backend.onrender.com/api/availabilities/availability",
         payload
       );
       toast.success("Availability saved!");
@@ -184,7 +184,7 @@ const AvailabilityForm = () => {
 
     try {
       const response = await axios.put(
-        `http://localhost:8000/api/availabilities/availability/${id}`,
+        `https://madonna-backend.onrender.com/api/availabilities/availability/${id}`,
         payload
       );
       toast.success("Edits saved!");

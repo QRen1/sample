@@ -13,11 +13,14 @@ function Register() {
     setError(""); // Reset error message on form submit
 
     try {
-      const response = await axios.post("http://localhost:8000/auth/register", {
-        fullName,
-        email,
-        password,
-      });
+      const response = await axios.post(
+        "https://madonna-backend.onrender.com/auth/register",
+        {
+          fullName,
+          email,
+          password,
+        }
+      );
 
       const { token } = response.data;
 

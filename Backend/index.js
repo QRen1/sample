@@ -34,7 +34,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: "http://127.0.0.1:5173", // or "*" for all origins
+    origin: "*", // or "*" for all origins
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"], // Ensure "Authorization" is listed
   })

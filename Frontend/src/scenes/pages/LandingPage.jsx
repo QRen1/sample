@@ -331,7 +331,7 @@ function LandingPage() {
             className="max-h-[300px] min-h-[200px] absolute bottom-10 right-5  flex h-[250px] w-[400px] flex-col border-[10px] border-white bg-[#b19f6e] p-2 text-[25px]"
           >
             <div className="mt-1 ">
-              <p>{formData.descriptions[0]}</p>
+              <p>{formData.descriptions[2]}</p>
             </div>
             <button className="flex h-[50px] items-center justify-end gap-2 p-2 cursor-pointer -translate-y-3">
               <svg

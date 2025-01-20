@@ -25,6 +25,7 @@ ChartJS.register(
 
 function Dashboard() {
   const [appointments, setAppointments] = useState([]);
+  const [waitingAppointments, setWaitingAppointments] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [selectedTimeRange, setSelectedTimeRange] = useState("monthly");
@@ -61,14 +62,53 @@ function Dashboard() {
   };
 
   // Helper function to generate data for weekly, monthly, and yearly
+  // const getTimeRangeData = () => {
+  //   const counts = {
+  //     weekly: [],
+  //     monthly: new Array(12).fill(0),
+  //     yearly: [],
+  //   };
+
+  //   appointments.forEach((appointment) => {
+  //     const date = new Date(appointment.date);
+  //     const year = date.getFullYear();
+  //     const month = date.getMonth(); // Month index (0 = January)
+  //     const dayOfYear = Math.floor(
+  //       (date - new Date(year, 0, 0)) / (1000 * 60 * 60 * 24)
+  //     );
+  //     const weekOfYear = Math.ceil(dayOfYear / 7);
+
+  //     // Weekly count: Track daily appointments for each week
+  //     const dayOfWeek = date.getDay(); // Get the day of the week (0 = Sunday, 1 = Monday, ...)
+  //     if (!counts.weekly[weekOfYear]) {
+  //       counts.weekly[weekOfYear] = new Array(7).fill(0); // Initialize an array for each week (7 days)
+  //     }
+  //     counts.weekly[weekOfYear][dayOfWeek]++; // Increment the count for the specific day of the week
+
+  //     // Monthly count
+  //     counts.monthly[month]++;
+
+  //     // Yearly count
+  //     if (!counts.yearly[year]) {
+  //       counts.yearly[year] = 0;
+  //     }
+  //     counts.yearly[year]++;
+  //   });
+
+  //   return counts;
+  // };
   const getTimeRangeData = () => {
+    const doneAppointments = appointments.filter(
+      (appointment) => appointment.appointment === "done"
+    );
+
     const counts = {
       weekly: [],
       monthly: new Array(12).fill(0),
       yearly: [],
     };
 
-    appointments.forEach((appointment) => {
+    doneAppointments.forEach((appointment) => {
       const date = new Date(appointment.date);
       const year = date.getFullYear();
       const month = date.getMonth(); // Month index (0 = January)
@@ -169,6 +209,35 @@ function Dashboard() {
     "All",
     ...[...new Set(servicesData.map((item) => item.serviceCategory))],
   ];
+  useEffect(() => {
+    const fetchAppointments = async () => {
+      setLoading(true);
+      try {
+        const userToken = localStorage.getItem("AdminToken");
+        const response = await axios.get(
+          "https://madonna-backend.onrender.com/api/appointments/get",
+          {
+            headers: { Authorization: `Bearer ${userToken}` },
+          }
+        );
+
+        const appointmentsData = response.data?.appointments || [];
+        // Filter for only 'done' appointments
+        const doneAppointments = appointmentsData.filter(
+          (appointment) => appointment.appointment === "done"
+        );
+
+        setAppointments(doneAppointments);
+      } catch (err) {
+        console.error("Error fetching appointments:", err);
+        setError("Failed to load appointments. Please try again.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAppointments();
+  }, []);
 
   const handleSearchChange = (e) => setSearchTerm(e.target.value);
   const handleMinPriceChange = (e) => setMinPrice(Number(e.target.value));
@@ -209,6 +278,38 @@ function Dashboard() {
 
     fetchServices();
   }, []);
+  // useEffect(() => {
+  //   const fetchAppointments = async () => {
+  //     setLoading(true);
+  //     try {
+  //       const userToken = localStorage.getItem("AdminToken");
+  //       const response = await axios.get(
+  //         "https://madonna-backend.onrender.com/api/appointments/get",
+  //         {
+  //           headers: { Authorization: `Bearer ${userToken}` },
+  //         }
+  //       );
+
+  //       const appointmentsData = response.data?.appointments || [];
+  //       // Filter for only 'done' appointments
+  //       const doneAppointments = appointmentsData.filter(
+  //         (appointment) => appointment.appointment === "done"
+  //       );
+
+  //       // Sort appointments by date in descending order (newest first)
+  //       doneAppointments.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+  //       setAppointments(doneAppointments);
+  //     } catch (err) {
+  //       console.error("Error fetching appointments:", err);
+  //       setError("Failed to load appointments. Please try again.");
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   fetchAppointments();
+  // }, []);
   useEffect(() => {
     const fetchAppointments = async () => {
       setLoading(true);
@@ -222,15 +323,16 @@ function Dashboard() {
         );
 
         const appointmentsData = response.data?.appointments || [];
-        // Filter for only 'done' appointments
-        const doneAppointments = appointmentsData.filter(
+
+        // Filter for 'waiting' appointments
+        const waitingAppointments = appointmentsData.filter(
           (appointment) => appointment.appointment === "waiting"
         );
 
         // Sort appointments by date in descending order (newest first)
-        doneAppointments.sort((a, b) => new Date(b.date) - new Date(a.date));
+        waitingAppointments.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-        setAppointments(doneAppointments);
+        setWaitingAppointments(waitingAppointments);
       } catch (err) {
         console.error("Error fetching appointments:", err);
         setError("Failed to load appointments. Please try again.");
@@ -241,7 +343,6 @@ function Dashboard() {
 
     fetchAppointments();
   }, []);
-
   return (
     <div className="flex flex-col gap-4">
       <div className="p-1">
@@ -404,12 +505,14 @@ function Dashboard() {
           <h1 className="text-center text-[25px]">Appointments</h1>
           {loading && <p className="text-center">Loading...</p>}
           {error && <p className="text-center text-red-500">{error}</p>}
-          {!loading && !error && appointments.length === 0 && (
+
+          {!loading && !error && waitingAppointments.length === 0 && (
             <p className="text-center">No appointments available.</p>
           )}
-          {!loading && !error && appointments.length > 0 && (
+
+          {!loading && !error && waitingAppointments.length > 0 && (
             <div className="flex flex-col items-center gap-2">
-              {appointments.map((appointment, index) => (
+              {waitingAppointments.map((appointment, index) => (
                 <div
                   key={index}
                   className="border p-4 mb-2 w-full max-w-md bg-white shadow-md rounded"

@@ -46,7 +46,9 @@ function Navbar({ isLoggedIn }) {
   useEffect(() => {
     const fetchStyles = async () => {
       try {
-        const response = await fetch("http://localhost:8000/api/styles/get");
+        const response = await fetch(
+          "https://madonna-backend.onrender.com/api/styles/get"
+        );
         const data = await response.json();
         if (response.ok) {
           setStyles(data);
@@ -78,7 +80,7 @@ function Navbar({ isLoggedIn }) {
           <Link to="/">
             {" "}
             <img
-              src={formData.logoImage.url}
+              src={formData.logoImage?.url}
               alt="Madonna || Aesthetics Logo"
               className="m-auto max-h-[100px]"
             />{" "}

@@ -34,6 +34,31 @@ function Dashboard() {
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(1000);
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [deleting, setDeleting] = useState(false);
+
+  const handleDelete = async (appointmentId) => {
+    if (!window.confirm("Are you sure you want to delete this appointment?")) {
+      return;
+    }
+    setDeleting(true);
+    try {
+      const response = await axios.delete(
+        `https://madonna-backend.onrender.com/api/services/${appointmentId}`
+      );
+      if (response.status === 200) {
+        setAppointments(
+          appointments.filter(
+            (appointment) => appointment._id !== appointmentId
+          )
+        );
+      }
+    } catch (err) {
+      console.error("Failed to delete appointment:", err);
+      setError("Failed to delete appointment.");
+    } finally {
+      setDeleting(false);
+    }
+  };
 
   // Helper function to generate data for weekly, monthly, and yearly
   const getTimeRangeData = () => {
@@ -362,7 +387,7 @@ function Dashboard() {
                     <div className="flex justify-between gap-2 mx-2">
                       <button
                         className="border border-[#fcdebe] py-2 w-full bg-red-500 text-white"
-                        onClick={() => handleOpenOuterDialog(item)}
+                        onClick={() => handleDelete(item._id)}
                       >
                         Delete
                       </button>
